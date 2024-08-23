@@ -22,13 +22,13 @@ export const authProvider: AuthProvider = {
                 meta: {
                     variables: { email },
                     rawQuery: `
-                mutation Login($email: String!) {
-                    login(loginInput: {
-                      email: $email
+                    mutation Login($email: String!) {
+                        login(loginInput: {
+                            email: $email
                     }) {
-                      accessToken,
+                        accessToken,
                     }
-                  }
+                }
                 `,
                 },
             });
@@ -120,7 +120,7 @@ export const authProvider: AuthProvider = {
                             timezone
                             avatarUrl
                         }
-                      }
+                    }
                 `,
                 },
             });
