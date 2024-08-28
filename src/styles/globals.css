@@ -1,0 +1,10 @@
+/* styles.css */
+.container {
+    padding: 0 5%;
+}
+
+@media (max-width: 1080px) {
+    .container {
+        padding: 0;
+    }
+}

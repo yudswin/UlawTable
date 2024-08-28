@@ -1,14 +1,16 @@
 import { Button, ConfigProvider, Form, Input } from 'antd';
-import { Course } from '@/lib/course';
 import { useForm } from 'antd/lib/form/Form';
+import { Fragment } from 'react/jsx-runtime';
 
 export type InputHandler = (rawInputString: string) => void;
 
 interface CourseInputProps {
     inputHandler: InputHandler;
+    onDeleteAll: () => void;
+    isDeleteVisible: boolean;
 }
 
-const CourseInput = ({ inputHandler }: CourseInputProps) => {
+const CourseInput = ({ inputHandler, onDeleteAll, isDeleteVisible }: CourseInputProps) => {
     const [form] = useForm();
 
     const handleSubmit = (data: { course: string }) => {
@@ -32,11 +34,19 @@ const CourseInput = ({ inputHandler }: CourseInputProps) => {
                     </Form.Item>
                     <Form.Item>
                         <Button
+                            style={{ width: '100px' }}
                             type='primary'
                             htmlType='submit'
                         >
                             Thêm Môn
                         </Button>
+                        {!isDeleteVisible ? <Fragment /> : (
+                            <Button style={{ background: 'red', width: '100px', marginLeft: '10px' }} onClick={onDeleteAll}>
+                            <span style={{ color: 'white' }}>
+                                Delete All
+                            </span>
+                        </Button>)}
+
                     </Form.Item>
                 </Form>
             </ConfigProvider>

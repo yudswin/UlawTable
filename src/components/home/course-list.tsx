@@ -1,38 +1,39 @@
 import React from 'react';
 import { Table, Button } from 'antd';
-import { Course } from '@/lib/course';
+import { Course, CourseInfo } from '@/lib/course';
 
 interface CourseListProps {
     courses: Course[];
     onDeleteCourse: (courseID: string) => void;
+    style?: React.CSSProperties; // Add style prop
 }
 
-const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse }) => {
+const getRandomHexColor = (): string => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+};
+
+
+const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse, style }) => {
     const columns = [
-        { title: 'Course ID', dataIndex: 'courseID', key: 'courseID' },
-        { title: 'Course Name', dataIndex: 'courseName', key: 'courseName' },
-        { title: 'Periods Count', dataIndex: 'periodsCount', key: 'periodsCount' },
-        { title: 'Category', dataIndex: 'category', key: 'category' },
-        { title: 'Date', dataIndex: 'date', key: 'date' },
-        { title: 'Start Period', dataIndex: 'startPeriod', key: 'startPeriod' },
-        { title: 'Start Week', dataIndex: 'startWeek', key: 'startWeek' },
-        { 
-            title: 'Location', 
-            dataIndex: 'location', 
-            key: 'location', 
-            render: (locations: string[]) => locations.join(', ') 
+        {
+            title: 'Index',
+            key: 'index',
+            render: (text: any, record: Course, index: number) => index + 1,
         },
-        { 
-            title: 'Lecturer', 
-            dataIndex: 'lecturer', 
-            key: 'lecturer', 
-            render: (lecturers: string[]) => lecturers.join(', ') 
+        {
+            title: 'Course ID',
+            dataIndex: 'courseID',
+            key: 'courseID',
         },
-        { 
-            title: 'Active', 
-            dataIndex: 'isActive', 
-            key: 'isActive', 
-            render: (isActive: boolean) => (isActive ? 'Yes' : 'No') 
+        {
+            title: 'Course Name',
+            dataIndex: 'courseName',
+            key: 'courseName',
         },
         {
             title: 'Action',
@@ -45,7 +46,60 @@ const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse }) => {
         },
     ];
 
-    return <Table dataSource={courses} columns={columns} rowKey="courseID" />;
+    const expandedRowRender = (record: Course) => {
+        const expandedColumns = [
+            {
+                title: 'Date',
+                key: 'date',
+                render: (text: any, record: CourseInfo) => record.date.join(', '),
+            },
+            {
+                title: 'Start Period',
+                key: 'startPeriod',
+                render: (text: any, record: CourseInfo) => record.startPeriod.join(', '),
+            },
+            {
+                title: 'Start Week',
+                key: 'startWeek',
+                render: (text: any, record: CourseInfo) => record.startWeek.join(', '),
+            },
+            {
+                title: 'Category',
+                key: 'category',
+                dataIndex: 'category',
+            },
+            {
+                title: 'Location',
+                key: 'location',
+                render: (text: any, record: CourseInfo) => record.location.join(', '),
+            },
+            {
+                title: 'View',
+                key: 'view',
+                render: (text: any, record: CourseInfo) => (
+                    <Button type="link" onClick={() => console.log(record)}>
+                        View
+                    </Button>
+                ),
+            },
+        ];
+
+        return <Table columns={expandedColumns} dataSource={record.infos} pagination={false} rowKey={(info: CourseInfo) => info.id} />;
+    };
+
+    const rowColors = courses.map(() => getRandomHexColor());
+
+    return (
+        <Table
+            dataSource={courses}
+            columns={columns}
+            rowKey="courseID"
+            pagination={false}
+            expandable={{ expandedRowRender }}
+            style={style} // Apply the style prop here
+            rowClassName={(record, index) => `row-${index}`}
+        />
+    );
 };
 
 export default CourseList;
