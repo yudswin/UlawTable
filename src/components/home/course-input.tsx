@@ -43,7 +43,7 @@ const CourseInput = ({ inputHandler, onDeleteAll, isDeleteVisible, }: CourseInpu
                             Thêm Môn
                         </Button>
                         {!isDeleteVisible ? <Fragment /> : (
-                            <Button style={{ background: 'red', width: '100px', marginLeft: '10px' }} onClick={onDeleteAll}>
+                            <Button style={{ background: '#ff6961', width: '100px', marginLeft: '10px' }} onClick={onDeleteAll}>
                                 <span style={{ color: 'white' }}>
                                     Delete All
                                 </span>

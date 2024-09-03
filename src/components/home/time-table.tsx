@@ -1,55 +1,62 @@
-import { Course } from "@/lib/course";
+import React, { useState } from 'react';
 
-interface TimeTableProps {
-    courses?: Course[];
-}
+const Timetable = () => {
+    // Mock data
+    const [classes] = useState([
+        { name: 'Math', date: 1, periods: [3, 4, 5] },
+        { name: 'English', date: 2, periods: [3, 4, 5] },
+        { name: 'Science', date: 3, periods: [6, 7] },
+    ]);
 
-const TimeTable: React.FC<TimeTableProps> = ({ courses }) => {
-    const periods = 16;
-    const daysOfWeek = 7;
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const periods = Array.from({ length: 16 }, (_, index) => index + 1);
 
-    // Create a 2D array to represent the time table
-    const timeTable: Course[][] = [];
-    for (let i = 0; i < periods; i++) {
-        timeTable.push([]);
-        for (let j = 0; j < daysOfWeek; j++) {
-            timeTable[i].push(null);
+    const renderCell = (row: any, col: any) => {
+        const classForPeriod = classes.find(c => c.date === col && c.periods.includes(row));
+
+        if (classForPeriod && classForPeriod.periods[0] === row) {
+            return (
+                <td key={`${row}-${col}`} rowSpan={classForPeriod.periods.length}>
+                    {classForPeriod.name}
+                </td>
+            );
+        } else if (classForPeriod) {
+            return null; // Skip the rendering of this cell as it's covered by rowspan
+        } else {
+            return <td key={`${row}-${col}`}></td>;
         }
-    }
+    };
 
-
-    courses?.forEach((course) => {
-        timeTable[course.period - 1][course.day - 1] = course;
-    });
+    const renderRow = (period: any) => {
+        return (
+            <tr key={period}>
+                <td>{period}</td>
+                {daysOfWeek.map((_, index) => renderCell(period, index + 1))}
+            </tr>
+        );
+    };
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Period</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                    <th>Sun</th>
-                </tr>
-            </thead>
-            <tbody>
-                {timeTable.map((period, index) => (
-                    <tr key={index}>
-                        <td>{index + 1}</td>
-                        {period.map((course, dayIndex) => (
-                            <td key={dayIndex}>
-                                {course ? course.name : ''}
-                            </td>
+        <div style={{ margin: '5% 6%' }}>
+            <table border={1} cellPadding={5} style={{
+                width: '100%',
+                textAlign: 'center',
+                tableLayout: 'fixed' // Ensure all columns have the same width
+            }}>
+                <thead>
+                    <tr>
+                        <th style={{ width: '50px' }}>Period</th> {/* Fixed width for the Period column */}
+                        {daysOfWeek.map((day, index) => (
+                            <th key={index} style={{ width: `${100 / daysOfWeek.length}%` }}>{day}</th>
                         ))}
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {periods.map(period => renderRow(period))}
+                </tbody>
+            </table>
+        </div>
     );
 };
 
-export default TimeTable;
+export default Timetable;

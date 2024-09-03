@@ -4,6 +4,7 @@ import { ConfigProvider } from 'antd';
 import { Course, mergeCourse, parseCourse } from '@/lib/course';
 import { InputHandler } from '@/components/home/course-input';
 import { getColor, getSecondaryColor } from '@/lib/schedule';
+import Header from '@/components/layout/header'
 
 export const Home = () => {
   const [courseList, setCourseList] = useState<Course[]>([]);
@@ -72,35 +73,38 @@ export const Home = () => {
 
 
   return (
-    <div className='container'>
-      <ConfigProvider
-        theme={{
-          components: {
-            Button: {
-              colorPrimary: '#333333',
-              colorPrimaryHover: '#595959',
-              colorPrimaryActive: '595959'
+    <>
+      <Header />
+      <div className='container'>
+        <ConfigProvider
+          theme={{
+            components: {
+              Button: {
+                colorPrimary: '#333333',
+                colorPrimaryHover: '#595959',
+                colorPrimaryActive: '595959'
+              },
+              Input: {
+                colorPrimary: '#333333',
+                colorPrimaryHover: '#595959',
+                colorPrimaryActive: '#595959'
+              }
             },
-            Input: {
-              colorPrimary: '#333333',
-              colorPrimaryHover: '#595959',
-              colorPrimaryActive: '#595959'
-            }
-          },
-        }}
-      >
-        <CourseInput inputHandler={handleSubmit} onDeleteAll={handleDeleteAll} isDeleteVisible={deleteAllVisible} />
-        {hasDuplicates && <p style={{ color: 'red' }}>Warning: Duplicate course IDs found.</p>}
-        <CourseList
-          courses={courseList}
-          onDeleteCourse={handleDeleteCourse}
-          style={{
-            overflowX: 'auto',
-            // minWidth: '750px',
           }}
-        />
-        <TimeTable />
-      </ConfigProvider>
-    </div>
+        >
+          <CourseInput inputHandler={handleSubmit} onDeleteAll={handleDeleteAll} isDeleteVisible={deleteAllVisible} />
+          {hasDuplicates && <p style={{ color: 'red' }}>Warning: Duplicate course IDs found.</p>}
+          <CourseList
+            courses={courseList}
+            onDeleteCourse={handleDeleteCourse}
+            style={{
+              overflowX: 'auto',
+              // minWidth: '750px',
+            }}
+          />
+          {/* <TimeTable /> */}
+        </ConfigProvider>
+      </div>
+    </>
   );
 };

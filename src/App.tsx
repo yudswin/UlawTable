@@ -45,7 +45,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/welcome" element={<WelcomePage />} />
-                <Route element={
+                {/* <Route element={
                   // <Authenticated
                   //   key="authenticated-layout"
                   //   fallback={<CatchAllNavigate to="/login" />}
@@ -58,8 +58,8 @@ function App() {
                     <Outlet />
                   </Layout>
                 }>
+                </Route> */}
                   <Route index element={<Home />} />
-                </Route>
               </Routes>
               <RefineKbar />
               <UnsavedChangesNotifier />

@@ -1,13 +1,14 @@
 import CurrentUser from "./current-user"
 import { Layout, Space } from "antd"
+import logo from '@/assets/public-logo.svg'
 
 const Header = () => {
     const headerStyles: React.CSSProperties = {
         background: '#333333',
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        padding: '0 24px',
+        padding: '40px 24px',
         position: "sticky",
         top: 0,
         zIndex: 999,
@@ -16,9 +17,18 @@ const Header = () => {
 
     return (
         <Layout.Header style={headerStyles}>
-            <Space align="center" size= "middle">
-                <CurrentUser />
+            <Space align="center" size="medium">
+                {/* <CurrentUser /> */}
+                <img src={logo} alt="Your Logo" style={{ height: '65px' }} />
+                <span style={{
+                    fontFamily: 'sans-serif',
+                    fontWeight: 'bold',
+                    color: '#ffffff'
+                }}
+                >ULAW TABLE</span>
             </Space>
+            <>
+            </>
         </Layout.Header>
     )
 }
