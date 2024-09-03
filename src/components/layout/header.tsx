@@ -17,7 +17,7 @@ const Header = () => {
 
     return (
         <Layout.Header style={headerStyles}>
-            <Space align="center" size="medium">
+            <Space align="center">
                 {/* <CurrentUser /> */}
                 <img src={logo} alt="Your Logo" style={{ height: '65px' }} />
                 <span style={{
