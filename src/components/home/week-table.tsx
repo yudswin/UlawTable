@@ -20,6 +20,7 @@ const WeekTable: React.FC<WeekTableProp> = ({ numbers }) => {
                                 padding: '2px',
                                 textAlign: 'center',
                                 fontSize: '8px',
+                                fontVariantNumeric: 'tabular-nums'
                             }}
                         >
                             {weekNumber}

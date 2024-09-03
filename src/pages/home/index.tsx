@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CourseTimetable, CourseInput, CourseList } from '@/components/home';
+import { TimeTable, CourseInput, CourseList } from '@/components/home';
 import { ConfigProvider } from 'antd';
 import { Course, mergeCourse, parseCourse } from '@/lib/course';
 import { InputHandler } from '@/components/home/course-input';
@@ -94,9 +94,12 @@ export const Home = () => {
         <CourseList
           courses={courseList}
           onDeleteCourse={handleDeleteCourse}
-          style={{ overflowX: 'auto' }}
+          style={{
+            overflowX: 'auto',
+            // minWidth: '750px',
+          }}
         />
-        <CourseTimetable />
+        <TimeTable />
       </ConfigProvider>
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, Button, ConfigProvider, TableProps } from 'antd';
 import { Course, CourseInfo } from '@/lib/course';
 import { WeekTable } from '@/components/home';
+import { title } from 'process';
 
 
 interface CourseListProps {
@@ -19,17 +20,17 @@ const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse, style 
 
     const columns = [
         {
-            title: 'Số thứ tự',
+            title: <span style={{ whiteSpace: 'nowrap' }}>Số thứ tự</span>,
             key: 'index',
             render: (text: any, record: Course, index: number) => index + 1,
         },
         {
-            title: 'Mã môn học',
+            title: <span style={{ whiteSpace: 'nowrap' }}>Mã môn học</span>,
             dataIndex: 'courseID',
             key: 'courseID',
         },
         {
-            title: 'Tên môn học',
+            title: <span style={{ whiteSpace: 'nowrap' }}>Tên môn học</span>,
             dataIndex: 'courseName',
             key: 'courseName',
         },
@@ -58,12 +59,12 @@ const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse, style 
             {
                 title: 'Ngày',
                 key: 'date',
-                render: (text: any, record: CourseInfo) => record.date.join(', '),
+                render: (text: any, record: CourseInfo) => <span style={{ whiteSpace: 'nowrap' }}>{record.date.join(', ')}</span>
             },
             {
                 title: 'Tiết học',
                 key: 'startPeriod',
-                render: (text: any, record: CourseInfo) => record.startPeriod[0] + ' → ' + record.startPeriod[record.startPeriod.length - 1],
+                render: (text: any, record: CourseInfo) => <span style={{ whiteSpace: 'nowrap' }}>{record.startPeriod[0] + ' → ' + record.startPeriod[record.startPeriod.length - 1]}</span>,
             },
             {
                 title: 'Tuần học',
@@ -146,6 +147,7 @@ const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse, style 
                 onRow={(record) => ({
                     style: {
                         backgroundColor: record.color || 'transparent',
+                        whiteSpace: 'nowrap'
                     },
                 })}
                 rowHoverable={false}
