@@ -21,7 +21,6 @@ import { resources } from "./config/resources";
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <AntdApp>
           <DevtoolsProvider>
@@ -31,7 +30,7 @@ function App() {
               notificationProvider={useNotificationProvider}
               routerProvider={routerBindings}
               authProvider={authProvider}
-              resources={resources}
+              // resources={resources}
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
@@ -47,18 +46,21 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/welcome" element={<WelcomePage />} />
                 <Route element={
-                  <Authenticated
-                    key="authenticated-layout"
-                    fallback={<CatchAllNavigate to="/login" />}
-                  >
-                    <Layout>
-                      <Outlet />
-                    </Layout>
-                  </Authenticated>}>
+                  // <Authenticated
+                  //   key="authenticated-layout"
+                  //   fallback={<CatchAllNavigate to="/login" />}
+                  // >
+                  //   <Layout>
+                  //     <Outlet />
+                  //   </Layout>
+                  // </Authenticated>
+                  <Layout>
+                    <Outlet />
+                  </Layout>
+                }>
                   <Route index element={<Home />} />
                 </Route>
               </Routes>
-
               <RefineKbar />
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />

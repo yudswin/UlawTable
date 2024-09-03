@@ -1,6 +1,7 @@
 import React from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, ConfigProvider, TableProps } from 'antd';
 import { Course, CourseInfo } from '@/lib/course';
+import { getColor, getSecondaryColor } from '@/lib/schedule';
 
 interface CourseListProps {
     courses: Course[];
@@ -8,17 +9,13 @@ interface CourseListProps {
     style?: React.CSSProperties; // Add style prop
 }
 
-const getRandomHexColor = (): string => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-};
-
+// const antdTableProp = (record: Course, index: number): row => {
+//     let 
+// }
 
 const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse, style }) => {
+
+
     const columns = [
         {
             title: 'Index',
@@ -35,6 +32,15 @@ const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse, style 
             dataIndex: 'courseName',
             key: 'courseName',
         },
+        // {
+        //     title: 'View',
+        //     key: 'view',
+        //     render: (text: any, record: CourseInfo) => (
+        //         <Button type="link" onClick={() => console.log(record)}>
+        //             View
+        //         </Button>
+        //     ),
+        // },
         {
             title: 'Action',
             key: 'action',
@@ -84,21 +90,59 @@ const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse, style 
             },
         ];
 
-        return <Table columns={expandedColumns} dataSource={record.infos} pagination={false} rowKey={(info: CourseInfo) => info.id} />;
+        // function getRandomInt(max: number) {
+        //     return Math.floor(Math.random() * max);
+        // }
+
+        return <ConfigProvider
+            theme={{
+                components: {
+                    Table: {
+                        headerBorderRadius: 0,
+                        colorBgContainer: record.colorSecondary
+                    }
+                },
+            }}
+        >
+            <Table
+                showHeader={false}
+                columns={expandedColumns}
+                dataSource={record.infos}
+                pagination={false}
+                rowKey={(info: CourseInfo) => info.id}
+            />
+        </ConfigProvider>
     };
 
-    const rowColors = courses.map(() => getRandomHexColor());
 
     return (
-        <Table
-            dataSource={courses}
-            columns={columns}
-            rowKey="courseID"
-            pagination={false}
-            expandable={{ expandedRowRender }}
-            style={style} // Apply the style prop here
-            rowClassName={(record, index) => `row-${index}`}
-        />
+        <ConfigProvider
+            theme={{
+                components: {
+                    Table: {
+                        headerBg: '#333333',
+                        headerColor: '#ffffff',
+                        // rowExpandedBg: '#333333',
+                        headerSplitColor: '#333333',
+                        colorSplit: '#red',
+                    }
+                },
+            }}
+        >
+            <Table
+                dataSource={courses}
+                columns={columns}
+                rowKey="courseID"
+                pagination={false}
+                expandable={{ expandedRowRender }}
+                style={style}
+                onRow={(record) => ({
+                    style: {
+                        backgroundColor: record.color || 'transparent',
+                    },
+                })}
+            />
+        </ConfigProvider>
     );
 };
 

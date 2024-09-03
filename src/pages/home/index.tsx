@@ -3,6 +3,7 @@ import { CourseTimetable, CourseInput, CourseList } from '@/components/home';
 import { ConfigProvider } from 'antd';
 import { Course, mergeCourse, parseCourse } from '@/lib/course';
 import { InputHandler } from '@/components/home/course-input';
+import { getColor, getSecondaryColor } from '@/lib/schedule';
 
 export const Home = () => {
   const [courseList, setCourseList] = useState<Course[]>([]);
@@ -38,9 +39,12 @@ export const Home = () => {
             updatedCourseList[existingCourseIndex] = mergeCourse(existingCourse, newCourse);
           }
         } else {
+          newCourse.color = getColor(updatedCourseList.length);
+          newCourse.colorSecondary = getSecondaryColor(updatedCourseList.length)
           updatedCourseList.push(newCourse);
         }
       });
+
 
       setCourseList(updatedCourseList);
       setHasDuplicates(hasDuplicates);
@@ -48,6 +52,7 @@ export const Home = () => {
       console.error('Error parsing courses:', error);
     }
   };
+
 
   const handleDeleteCourse = (courseID: string) => {
     setCourseList(courseList.filter(course => course.courseID !== courseID));

@@ -14,6 +14,8 @@ export interface CourseInfo {
 export interface Course {
     courseID: string;
     courseName: string;
+    color?: string;
+    colorSecondary?: string;
     infos: CourseInfo[];
 }
 
