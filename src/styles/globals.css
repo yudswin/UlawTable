@@ -1,6 +1,6 @@
 /* styles.css */
 .container {
-    padding: 20px 10%;
+    padding: 20px 15%;
 }
 
 .courselistRows {
@@ -11,6 +11,6 @@
 
 @media (max-width: 1080px) {
     .container {
-        padding: 20px;
+        padding: 5%;
     }
 }
