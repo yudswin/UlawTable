@@ -16,6 +16,7 @@ import { Login, ForgotPassword, Register, Home } from "./pages";
 import { dataProvider, liveProvider, authProvider } from "./providers";
 import Layout from "./components/layout";
 import { resources } from "./config/resources";
+import Doc from "./pages/doc";
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
               notificationProvider={useNotificationProvider}
               routerProvider={routerBindings}
               authProvider={authProvider}
-              // resources={resources}
+              resources={resources}
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/welcome" element={<WelcomePage />} />
+                <Route path="/doc" element={<Doc />} />
                 {/* <Route element={
                   // <Authenticated
                   //   key="authenticated-layout"
@@ -59,7 +61,7 @@ function App() {
                   </Layout>
                 }>
                 </Route> */}
-                  <Route index element={<Home />} />
+                <Route index element={<Home />} />
               </Routes>
               <RefineKbar />
               <UnsavedChangesNotifier />

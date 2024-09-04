@@ -44,19 +44,9 @@ const Header = () => {
     return (
         <>
             <ConfigProvider
-                theme={{
-                    components: {
-                        Button: {
-                            colorPrimary: '#333333',
-                            colorPrimaryHover: '#595959',
-                            colorPrimaryActive: '#595959',
-                            defaultActiveBorderColor:'white'
-                        },
-                    },
-                }}
+                wave={{ disabled: true }}
             >
-
-                <Layout.Header style={headerStyles} className="container">
+                <Layout.Header title="UlawTable" style={headerStyles} className="container">
                     <Space align="center" size='large'>
                         <a href="/">
                             <Space size='small' align="center" onClick={() => alert}>
@@ -65,7 +55,8 @@ const Header = () => {
                                     fontFamily: 'fantasy',
                                     fontWeight: '',
                                     color: '#ffffff',
-                                    fontSize: '20px'
+                                    fontSize: '20px',
+                                    whiteSpace: 'nowrap'
                                 }}>
                                     ULAW TABLE
                                 </span>
@@ -88,6 +79,7 @@ const Header = () => {
                             border: '0',
                             alignItems: 'center'
                         }}
+                        className="mobileHide"
                         onClick={() => window.open("https://github.com/yudswin/ulawtable", "_blank")}
                     >
                         <span style={{

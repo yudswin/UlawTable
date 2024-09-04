@@ -1,24 +1,18 @@
-import { DashboardOutlined, ShopOutlined } from "@ant-design/icons";
 import { IResourceItem } from "@refinedev/core";
 
 export const resources: IResourceItem[] = [
     {
-        name: 'dashboard',
+        name: 'UlawTable',
         list: '/',
         meta: {
-            label: 'Dashboard',
-            icon: <DashboardOutlined/>
+            label: 'ULawTable',
         }
     },
     {
-        name: 'company',
-        list: '/companies',
-        show: '/companies/:id',
-        create: '/companies/new',
-        edit: '/companies/edit/:id',
+        name: 'document',
+        list: '/doc',
         meta: {
-            label: 'Companies',
-            icon: <ShopOutlined />
+            label: 'Document',
         }
     }
 ]
