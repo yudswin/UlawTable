@@ -5,6 +5,8 @@ import { Course, mergeCourse, parseCourse } from '@/lib/course';
 import { InputHandler } from '@/components/home/course-input';
 import { getColor, getSecondaryColor } from '@/lib/schedule';
 import Header from '@/components/layout/header'
+import Footer from '@/components/layout/footer'
+
 
 export const Home = () => {
   const [courseList, setCourseList] = useState<Course[]>([]);
