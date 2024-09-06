@@ -1,13 +1,13 @@
-import { ClassType, WeekDate } from "./schedule";
+import { ClassType, CourseSchedule, getIndexOfWeek } from "./schedule";
 
 export interface CourseInfo {
     id: number;
     periodsCount: number;
     category: ClassType;
-    date: WeekDate[];
+    date: string;
     startPeriod: number[];
     startWeek: number[];
-    location: string[];
+    location: string;
     isActive: boolean;
 }
 
@@ -18,6 +18,7 @@ export interface Course {
     colorSecondary?: string;
     infos: CourseInfo[];
 }
+
 
 function mapObject(parseData: string[]): Course[] {
     let courses: Course[] = [];
@@ -32,12 +33,11 @@ function mapObject(parseData: string[]): Course[] {
         const courseName = parseData[1 + offset];
         const periodsCount = parseInt(parseData[2 + offset]);
         const category = parseData[3 + offset] as ClassType;
-        const date = [parseData[4 + offset] as WeekDate];
+        const date = parseData[4 + offset];
         const startPeriodString = parseData[5 + offset];
-        const location = [parseData[6 + offset]];
+        const location = parseData[6 + offset];
         const startWeekString = parseData[7 + offset];
         const isActive = false;
-
         const startPeriod: number[] = [];
         for (let i = 0; i < startPeriodString.length; i++) {
             if (startPeriodString[i] !== '-') {
@@ -53,7 +53,7 @@ function mapObject(parseData: string[]): Course[] {
         }
 
         const courseInfo: CourseInfo = {
-            id: offset / step, // Assign id using the index
+            id: offset / step,
             periodsCount,
             category,
             date,
@@ -90,11 +90,11 @@ export const mergeCourse = (existingCourse: Course, newCourse: Course): Course =
 
     newCourse.infos.forEach(newInfo => {
         const existingInfoIndex = mergedInfos.findIndex(info =>
-            info.date.some(date => newInfo.date.includes(date)) &&
+            info.date === newInfo.date &&
             info.startPeriod.some(period => newInfo.startPeriod.includes(period)) &&
             info.startWeek.some(week => newInfo.startWeek.includes(week)) &&
             info.category === newInfo.category &&
-            info.location.some(loc => newInfo.location.includes(loc))
+            info.location === newInfo.location
         );
 
         if (existingInfoIndex !== -1) {
@@ -102,10 +102,10 @@ export const mergeCourse = (existingCourse: Course, newCourse: Course): Course =
             mergedInfos[existingInfoIndex] = {
                 ...existingInfo,
                 periodsCount: newInfo.periodsCount || existingInfo.periodsCount,
-                date: [...new Set([...existingInfo.date, ...newInfo.date])],
+                date: newInfo.date || existingInfo.date,
                 startPeriod: [...new Set([...existingInfo.startPeriod, ...newInfo.startPeriod])],
                 startWeek: [...new Set([...existingInfo.startWeek, ...newInfo.startWeek])],
-                location: [...new Set([...existingInfo.location, ...newInfo.location])],
+                location: newInfo.location || existingInfo.location,
                 isActive: newInfo.isActive || existingInfo.isActive
             };
         } else {
@@ -119,3 +119,26 @@ export const mergeCourse = (existingCourse: Course, newCourse: Course): Course =
         infos: mergedInfos
     };
 };
+
+
+export function generateCourseMap(courseList: Course[]): CourseSchedule[][] {
+    let weekCourses: CourseSchedule[][] = Array.from({ length: 22 }, () => []);
+
+    courseList.forEach(course => {
+        course.infos.forEach(info => {
+            info.startWeek.forEach(week => {
+                if (week >= 1 && week <= 22) {
+                    const courseSchedule: CourseSchedule = {
+                        courseInfo: course,
+                        location: info.location,
+                        date: getIndexOfWeek(info.date),
+                        periods: info.startPeriod
+                    };
+                    weekCourses[week - 1].push(courseSchedule);
+                }
+            });
+        });
+    });
+
+    return weekCourses;
+}

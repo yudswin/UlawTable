@@ -1,4 +1,4 @@
-import { Button, ConfigProvider, Form, Input } from 'antd';
+import { Button, ConfigProvider, Form, Input, Space } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import { useEffect } from 'react';
 import { Fragment } from 'react/jsx-runtime';
@@ -8,10 +8,11 @@ export type InputHandler = (rawInputString: string) => void;
 interface CourseInputProps {
     inputHandler: InputHandler;
     onDeleteAll: () => void;
-    isDeleteVisible: boolean;
+    onHandleWeek: () => void;
+    isFunctionVisible: boolean;
 }
 
-const CourseInput = ({ inputHandler, onDeleteAll, isDeleteVisible, }: CourseInputProps) => {
+const CourseInput = ({ inputHandler, onDeleteAll, onHandleWeek, isFunctionVisible }: CourseInputProps) => {
     const [form] = useForm();
 
     const handleSubmit = (data: { course: string }) => {
@@ -35,19 +36,28 @@ const CourseInput = ({ inputHandler, onDeleteAll, isDeleteVisible, }: CourseInpu
                         />
                     </Form.Item>
                     <Form.Item>
-                        <Button
-                            style={{ width: '100px' }}
-                            type='primary'
-                            htmlType='submit'
-                        >
-                            Thêm Môn
-                        </Button>
-                        {!isDeleteVisible ? <Fragment /> : (
-                            <Button style={{ background: '#ff6961', width: '100px', marginLeft: '10px' }} onClick={onDeleteAll}>
-                                <span style={{ color: 'white' }}>
-                                    Delete All
-                                </span>
-                            </Button>)}
+                        <Space align='center' size='middle'>
+                            <Button
+                                style={{ width: '100px' }}
+                                type='primary'
+                                htmlType='submit'
+                            >
+                                Thêm Môn
+                            </Button>
+                            {!isFunctionVisible ? <Fragment /> : (<>
+                                <Button style={{ background: '#ff6961', width: '100px' }} onClick={onDeleteAll}>
+                                    <span style={{ color: 'white' }}>
+                                        Delete All
+                                    </span>
+                                </Button>
+                                <Button
+                                    onClick={onHandleWeek}
+                                >
+                                    Cập nhật thời khoá biểu
+                                </Button>
+                            </>
+                            )}
+                        </Space>
 
                     </Form.Item>
                 </Form>

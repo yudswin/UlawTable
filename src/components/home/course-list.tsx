@@ -1,8 +1,7 @@
 import React from 'react';
-import { Table, Button, ConfigProvider, TableProps } from 'antd';
+import { Table, Button, ConfigProvider } from 'antd';
 import { Course, CourseInfo } from '@/lib/course';
 import { WeekTable } from '@/components/home';
-import { title } from 'process';
 
 
 interface CourseListProps {
@@ -59,7 +58,7 @@ const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse, style 
             {
                 title: 'Ngày',
                 key: 'date',
-                render: (text: any, record: CourseInfo) => <span style={{ whiteSpace: 'nowrap' }}>{record.date.join(', ')}</span>
+                render: (text: any, record: CourseInfo) => <span style={{ whiteSpace: 'nowrap' }}>{record.date}</span>
             },
             {
                 title: 'Tiết học',
@@ -79,7 +78,7 @@ const CourseList: React.FC<CourseListProps> = ({ courses, onDeleteCourse, style 
             {
                 title: 'Phòng học',
                 key: 'location',
-                render: (text: any, record: CourseInfo) => record.location.join(', '),
+                render: (text: any, record: CourseInfo) => record.location,
             },
             // {
             //     title: 'View',

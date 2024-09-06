@@ -1,6 +1,37 @@
-export type WeekDate = "Mon" | "Tue" | "Wed" | "Thu" | "Fri" | "Sat" | "Sun";
+import { Course } from "./course";
 
-export type ClassType = "Lý thuyết" | "Practical" | "General"
+export const vietnameseDays = [
+    "Chủ Nhật",
+    "Thứ Hai",
+    "Thứ Ba",
+    "Thứ Tư",
+    "Thứ Năm",
+    "Thứ Sáu",
+    "Thứ Bảy"
+]
+
+
+export function getCourseLocation(course: Course, dateByIndex: number): string{
+    const location = course.infos.find(c => c.date == vietnameseDays[dateByIndex])?.location
+    if (location === undefined) throw new Error("not found location")
+    return location
+}
+
+export function getIndexOfWeek(date: string): number {
+    const index = vietnameseDays.indexOf(date);
+    // alert(index)
+    if (index == -1) throw new Error("Error string (date): " + date)
+    return index + 1
+}
+
+export type ClassType = "Lý thuyết" | "Practical" | "General";
+
+export interface CourseSchedule {
+    courseInfo: Course;
+    date: number;
+    location: string;
+    periods: number[];
+}
 
 const pastelColors: string[] = [
     "#fbf8cb",
@@ -37,3 +68,4 @@ export function getSecondaryColor(index: number): string {
     const wrappedIndex = index % secondaryPastelColors.length;
     return secondaryPastelColors[wrappedIndex];
 }
+
