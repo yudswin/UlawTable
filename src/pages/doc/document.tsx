@@ -23,7 +23,15 @@ const Document = () => {
                 <h3>Hướng dẫn</h3>
                 <p>
                     <Divider orientation="left">Bước 1</Divider>
-                    Bắt đầu bằng việc đánh dấu (bôi đen) bảng thời khoá biểu từ file Excel {" "}
+                    Bắt đầu bằng việc đánh dấu (bôi đen) bảng thời khoá biểu từ file Excel &nbsp;
+                    <a
+                        href='https://docs.google.com/spreadsheets/d/11iiDgp-S3mHYcaaLjEhpligyXsiWC22Ecf8BU523iNo/edit?usp=sharing'
+                        style={{ color: 'blue' }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        (Lấy mẫu Excel)
+                    </a> {" "}
                     <br />
                     và copy chúng vào clipboard của bạn bằng <code>Ctrl + C</code> trên Windows
                     hoặc <code>Command + C</code> trên MacOS.

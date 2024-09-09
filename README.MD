@@ -1,49 +1,32 @@
 # UlawTable
 
 <div align="center" style="margin: 30px;">
-    <a href="https://refine.dev">
-    <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
+    <a href="https://github.com/yudswin/UlawTable">
+    <img alt="githubBanner" src="/public/githubBanner.png">
     </a>
 </div>
 <br/>
 
-This [Refine](https://github.com/refinedev/refine) project was generated with [create refine-app](https://github.com/refinedev/refine/tree/master/packages/create-refine-app).
+## 🎨 About this project
 
-## Getting Started
+<p align="justify" style="text-align: justify;">
+UlawTable is a digital learning platform specifically designed to aid HCMULAW students. This platform currently offers visualization of a time table more range of features will be coming up next (may include access to course materials, study groups, discussion forums, a calendar, flashcards, and quizzes). By providing these resources and tools, UlawTable aims to enhance the learning experience and support students in achieving academic success.
+</p>
 
-A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility ✨
 
-Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
+## ⚒️ Installation
+To run the project, follow these simple steps:
 
-## Available Scripts
+Clone the repository
+Run `npm install` to install the necessary dependencies
+Then `npm run dev` to run the projectt
 
-### Running the development server.
-
-```bash
-    npm run dev
-```
-
-### Building for production.
-
-```bash
-    npm run build
-```
-
-### Running the production server.
-
-```bash
-    npm run start
-```
-
-## Learn More
-
-To learn more about **Refine**, please check out the [Documentation](https://refine.dev/docs)
-
-- **NestJS Query Data Provider** [Docs](https://refine.dev/docs/data/packages/nestjs-query/)
-- **Ant Design** [Docs](https://refine.dev/docs/ui-frameworks/antd/tutorial/)
-- **React Router** [Docs](https://refine.dev/docs/core/providers/router-provider/)
-- **Custom Auth Provider** [Docs](https://refine.dev/docs/core/providers/auth-provider/)
-
-## License
-
+## 🪪 License
 MIT
+
+## 📃 To-do
+- [x] <s>Tooltips</s>
+- [x] <s>Documents</s>
+- [ ]  Notifications
+- [ ]  Exports/Sharing Functions
+- [ ]  Majors: Midterm, Final timeline
