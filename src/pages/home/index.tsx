@@ -100,9 +100,11 @@ export const Home = () => {
           theme={{
             components: {
               Button: {
+                defaultHoverColor: '#333333',
+                defaultShadow: '#333333',
                 colorPrimary: '#333333',
                 colorPrimaryHover: '#595959',
-                colorPrimaryActive: '595959'
+                colorPrimaryActive: '#262626'
               },
               Input: {
                 colorPrimary: '#333333',
