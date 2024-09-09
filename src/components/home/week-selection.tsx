@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Select } from 'antd';
+import { ConfigProvider, Select } from 'antd';
 
 interface SelectionProps {
     options: { value: string; label: string }[];
@@ -17,18 +17,32 @@ const WeekSelection: React.FC<SelectionProps> = ({ options, onChange }) => {
     };
 
     return (
-        <Select
-            value={selectedOption}
-            onChange={handleOptionChange}
-            placeholder="Chọn tuần học"
-            style={{ width: 350, marginTop: '30px' }}
+        <ConfigProvider
+            theme={{
+                components: {
+                    Select: {
+                        colorBorder: '#7f7f7f',
+                        colorPrimaryHover:'#333333',
+                        multipleItemBorderColor: '#333333',
+                        colorPrimary: '#333333',
+                        controlOutline: 'rgba(51, 51, 51, 0.1)'
+                    }
+                },
+            }}
         >
-            {options.map((option) => (
-                <Option key={option.value} value={option.value}>
-                    {option.label}
-                </Option>
-            ))}
-        </Select>
+            <Select
+                value={selectedOption}
+                onChange={handleOptionChange}
+                placeholder="Chọn tuần học"
+                style={{ width: 350, marginTop: '30px' }}
+            >
+                {options.map((option) => (
+                    <Option key={option.value} value={option.value}>
+                        {option.label}
+                    </Option>
+                ))}
+            </Select>
+        </ConfigProvider>
     );
 };
 

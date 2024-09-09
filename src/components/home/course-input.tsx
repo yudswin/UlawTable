@@ -24,46 +24,59 @@ const CourseInput = ({ inputHandler, onDeleteAll, onHandleWeek, isFunctionVisibl
         <div style={{
             overflowX: 'auto',
         }}>
-            <ConfigProvider>
-                <label htmlFor='rawInputString'>Paste môn học vào đây:</label>
-                <Form form={form} layout='vertical' onFinish={handleSubmit}>
-                    <Form.Item
-                        name='course'
-                        rules={[{ required: true, message: 'Please input your course!' }]} // Ensure the field is required
-                    >
-                        <Input
-                            type='text'
-                            id='rawInputString'
-                            style={{ width: '50%' }}
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <Space align='center' size='middle'>
-                            <Button
-                                style={{ width: '100px' }}
-                                type='primary'
-                                htmlType='submit'
+            <label htmlFor='rawInputString'>Paste môn học vào đây:</label>
+            <Form form={form} layout='vertical' onFinish={handleSubmit}>
+                <Form.Item
+                    name='course'
+                    rules={[{ required: true, message: 'Please input your course!' }]} // Ensure the field is required
+                >
+                    <Input
+                        type='text'
+                        id='rawInputString'
+                        style={{ width: '50%' }}
+                    />
+                </Form.Item>
+                <Form.Item>
+                    <Space align='center' size='middle'>
+                        <Button
+                            style={{ width: '100px' }}
+                            type='primary'
+                            htmlType='submit'
+                        >
+                            Thêm Môn
+                        </Button>
+                        {!isFunctionVisible ? <Fragment /> : (<>
+                            <ConfigProvider
+                                theme={{
+                                    components: {
+                                        Button: {
+                                            defaultHoverBorderColor: '#d85851',
+                                            defaultHoverBg: '#d85851',
+                                            defaultBg: '#ff675f',
+                                            defaultBorderColor: '#ff675f',
+                                            defaultActiveBg: '#ff675f',
+                                            defaultActiveBorderColor: '#ff675f'
+                                        }
+                                    },
+                                }}
                             >
-                                Thêm Môn
-                            </Button>
-                            {!isFunctionVisible ? <Fragment /> : (<>
-                                <Button style={{ background: '#ff6961', width: '100px' }} onClick={onDeleteAll}>
+                                <Button style={{ width: '100px' }} onClick={onDeleteAll}>
                                     <span style={{ color: 'white' }}>
                                         Delete All
                                     </span>
                                 </Button>
-                                <Button
-                                    onClick={onHandleWeek}
-                                >
-                                    Cập nhật thời khoá biểu
-                                </Button>
-                            </>
-                            )}
-                        </Space>
+                            </ConfigProvider>
+                            <Button
+                                onClick={onHandleWeek}
+                            >
+                                Cập nhật thời khoá biểu
+                            </Button>
+                        </>
+                        )}
+                    </Space>
 
-                    </Form.Item>
-                </Form>
-            </ConfigProvider>
+                </Form.Item>
+            </Form>
         </div>
     );
 };
