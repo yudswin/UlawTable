@@ -1,6 +1,7 @@
 import { CourseSchedule, getCourseLocation, vietnameseDays } from '@/lib/schedule';
 import TimeInfo from '../tooltip/time';
 import { Tooltip } from 'antd';
+import ClassInfo from '../tooltip/classinfo';
 
 interface TimetableProps {
     courses?: CourseSchedule[]
@@ -14,7 +15,7 @@ const Timetable: React.FC<TimetableProps> = ({ courses }) => {
         if (courseForPeriod && courseForPeriod.periods[0] === coursePeriod) {
             return (
                 //{<div style={{ background: courseForPeriod.courseInfo.color }}></div>}
-                <Tooltip color={courseForPeriod.courseInfo.color} title="">
+                <Tooltip color={courseForPeriod.courseInfo.color} title={<ClassInfo course={courseForPeriod}/>}>
                     <td key={`${coursePeriod}-${weekDate}`} rowSpan={courseForPeriod.periods.length} style={{
                         background: courseForPeriod.courseInfo.colorSecondary,
                         // border: `1px solid ${courseForPeriod.courseInfo.color}`

@@ -21,7 +21,9 @@ const CourseInput = ({ inputHandler, onDeleteAll, onHandleWeek, isFunctionVisibl
     };
 
     return (
-        <div>
+        <div style={{
+            overflowX: 'auto',
+        }}>
             <ConfigProvider>
                 <label htmlFor='rawInputString'>Paste môn học vào đây:</label>
                 <Form form={form} layout='vertical' onFinish={handleSubmit}>
