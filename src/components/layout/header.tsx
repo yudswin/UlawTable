@@ -52,8 +52,8 @@ const Header = () => {
                             <Space size='small' align="center" onClick={() => alert}>
                                 <img src={logo} alt="Your Logo" style={{ height: '65px' }} />
                                 <span style={{
-                                    fontFamily: 'fantasy',
-                                    fontWeight: '',
+                                    fontFamily: 'Poppins',
+                                    fontWeight: 'bolder',
                                     color: '#ffffff',
                                     fontSize: '20px',
                                     whiteSpace: 'nowrap'
@@ -64,7 +64,8 @@ const Header = () => {
                         </a>
                         {/* <CurrentUser /> */}
                         <a href="/doc" style={{
-                            fontFamily: 'fantasy',
+                            fontFamily: 'Poppins',
+                            fontWeight: 'bolder',
                             fontSize: '20px',
                             color: 'white',
                         }}>
@@ -83,8 +84,8 @@ const Header = () => {
                         onClick={() => window.open("https://github.com/yudswin/ulawtable", "_blank")}
                     >
                         <span style={{
-                            fontFamily: 'fantasy',
-                            fontWeight: '',
+                            fontFamily: 'Poppins',
+                            fontWeight: 'bold',
                             fontSize: '15px',
                             color: repoStatus ? '#00a600' : '#ff6961',
                             borderBottom: '5px solid'

@@ -3,6 +3,10 @@ import addedClasses from '/addedClasses.png'
 import pasteClassInput from '/pasteClassInput.png'
 import highlightClasses from '/highlightClasses.png'
 import generatedSchedules from '/generatedSchedules.png'
+import weekSelection from '/weekSelection.png'
+import updateSchedules from '/updateSchedules.png'
+import courseInfos from '/courseInfos.png'
+
 import { Divider, Image } from 'antd'
 
 const Document = () => {
@@ -34,7 +38,7 @@ const Document = () => {
                     Chỉ copy phần nội dung quan trọng!
                     (Lớp học phần → Tuần học)
                 </blockquote>
-                
+
                 <br />
 
                 <p>
@@ -52,7 +56,7 @@ const Document = () => {
                 <blockquote>
                     Ô nhập dữ liệu có thể trông khá lạ, đừng để ý
                 </blockquote>
-                
+
                 <br />
 
                 <p>
@@ -63,7 +67,7 @@ const Document = () => {
                         width='100%'
                         src={addedClasses}
                     />
-                    
+
                     <br />
                 </p>
 
@@ -80,6 +84,52 @@ const Document = () => {
                 <blockquote>
                     Tuần học được đánh dấu màu đen
                 </blockquote>
+
+                <br />
+
+                <p>
+                    <Divider orientation="left">Bước 4</Divider>
+                    Sau khi đã thêm môn, bấm vào "Cập nhật thời khoá biểu" để thêm môn vào thời khoá biểu
+                    <br />
+                    <Image
+                        width='100%'
+                        src={updateSchedules}
+                    />
+                    <br />
+                </p>
+
+                <br />
+
+                <p>
+                    <Divider orientation="left">Bước 5</Divider>
+                    Chọn tuần học từ 1 → 22
+                    <br />
+                    <Image
+                        width='100%'
+                        src={weekSelection}
+                    />
+                    <br />
+                </p>
+
+                <blockquote>
+                    Lưu ý: phải "Cập nhật thời khoá biểu" thì môn học mới xuất hiện
+                </blockquote>
+
+                <br />
+
+                <p>
+                    <br />
+                    <Image
+                        width='100%'
+                        src={courseInfos}
+                    />
+                    <br />
+                </p>
+
+                <blockquote>
+                    Thông tin sẽ được hiện thị khi đưa chuột vào môn học
+                </blockquote>
+
             </article>
         </div>
     )
